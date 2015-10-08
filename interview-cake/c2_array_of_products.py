@@ -3,6 +3,11 @@ def main():
 
     print("Input: %s produced Output: %s" %(sampleInput, get_product_array_v3(sampleInput)))
 
+def get_product_array_bonus(inputList):
+    # allowe to use division this time
+
+    pass
+
 def get_product_array_v3(inputList):
     ''' 
     Returns a list of the products of all elements of the input 
