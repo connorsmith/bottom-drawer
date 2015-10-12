@@ -7,38 +7,44 @@ class Trie:
 
     def addWord(self, word):
         # print(word)
-        if word == []:
+        if word == '':
             self.wordNum += 1
         else:
             self.prefixNum += 1
-            firstCharacter = word.pop(0)
+            firstCharacter = word[0]
+            restOfWord = word[1:]
             # print(firstCharacter)
             if firstCharacter not in self.edges:
                 self.edges[firstCharacter] = Trie()
-            self.edges[firstCharacter].addWord(word)
+            self.edges[firstCharacter].addWord(restOfWord)
 
     def countWords(self, word):
-        if word == []:
+        if word == '':
             return self.wordNum
 
-        firstCharacter = word.pop(0)
+        firstCharacter = word[0]
+        restOfWord = word[1:]
 
         if firstCharacter not in self.edges:
             return 0
         else:
-            return self.edges[firstCharacter].countWords(word)
+            return self.edges[firstCharacter].countWords(restOfWord)
 
     def countPrefixes(self, prefix):
-        if prefix == []:
+        if prefix == '':
             return self.prefixNum
 
-        firstCharacter = prefix.pop(0)
-        print("Searching for '%s' as a prefix"%(firstCharacter))
+        firstCharacter = prefix[0]
+        restOfPrefix = prefix[1:]
+        # print("Searching for '%s' as a prefix"%(firstCharacter))
 
         if firstCharacter not in self.edges:
             return 0
         else:
-            return self.edges[firstCharacter].countPrefixes(prefix)
+            return self.edges[firstCharacter].countPrefixes(restOfPrefix)
+
+    def getWords(self):
+        pass
 
 def main():
     print("Testing Code for Trie Class")
@@ -47,13 +53,16 @@ def main():
 
     t = Trie()
 
-    stringList = ['first','face','fire', 'faced']
-    wordList = [list(s) for s in stringList]
+    stringList = ['first','face','fire', 'faced', 'fir']
+    # wordList = [list(s) for s in stringList]
 
-    for word in wordList:
+    prefix = 'fi'
+
+    for word in stringList:
         t.addWord(word)
-        print(t.countWords(['f','i','r','e']))
+        print("Prefix '%s' has %s words in the Trie."%(prefix, t.countPrefixes(prefix)))
 
+    # for debugging
     # print(t.edges)
     # print(t.edges['f'].edges)
     # print(t.edges['f'].edges['i'].edges)
