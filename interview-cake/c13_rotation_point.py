@@ -11,10 +11,27 @@ def findRotationPointLinear(inputList):
     return 0
 
 # taking advantage of the almost sort nature of the list -> O(log(n))
-def findRotationPointBinary(inputList)
-    pass
+def findRotationPointBinary(inputList):
+    startIndex = 0
+    endIndex = len(inputList) - 1
+    middleIndex = int(len(inputList)/2.0)
+
+    if inputList[startIndex] < inputList[endIndex]:
+        return 0
+
+    while startIndex < endIndex:
+        if inputList[startIndex] < inputList[middleIndex]:
+            startIndex = middleIndex
+        else:
+            endIndex = middleIndex
+        middleIndex = (endIndex + startIndex) / 2
     
+    # print("start index: %s, end index: %s, middle index: %s"%(startIndex, endIndex, middleIndex))
+    return endIndex+1
+
+
 def main():
+    # test case 1
     words = [
         'ptolemaic',
         'retrograde',
@@ -29,9 +46,30 @@ def main():
         'othellolagkage'
     ]
     
-    rotationPoint = findRotationPointLinear(words)
+    print('Using linear search, rotation point: %s' %(words[findRotationPointLinear(words)]))
+    print('Using binary search, rotation point: %s\n' %(words[findRotationPointBinary(words)]))
 
-    print('Rotation Point: %s' %(words[rotationPoint]))
+    # test case 2
+    words = [
+        'zebra',
+        'angler',
+        'broom',
+        'cobra'
+    ]
+    
+    print('Using linear search, rotation point: %s' %(words[findRotationPointLinear(words)]))
+    print('Using binary search, rotation point: %s\n' %(words[findRotationPointBinary(words)]))
 
+    # test case 3
+    words = [
+        'comedian'
+        'xylophone',
+        'avocado',
+    ]
+    
+    print('Using linear search, rotation point: %s' %(words[findRotationPointLinear(words)]))
+    print('Using binary search, rotation point: %s\n' %(words[findRotationPointBinary(words)]))
+
+    
 if __name__ == "__main__":
     main()
