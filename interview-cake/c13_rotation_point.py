@@ -70,6 +70,15 @@ def main():
     print('Using linear search, rotation point: %s' %(words[findRotationPointLinear(words)]))
     print('Using binary search, rotation point: %s\n' %(words[findRotationPointBinary(words)]))
 
+    # test case 4, unrotated array
+    words = [
+        'batman',
+        'joker',
+        'zarathustra'
+    ]
+
+    print('Using linear search, rotation point: %s' %(words[findRotationPointLinear(words)]))
+    print('Using binary search, rotation point: %s\n' %(words[findRotationPointBinary(words)]))
     
 if __name__ == "__main__":
     main()
