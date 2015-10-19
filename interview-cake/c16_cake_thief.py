@@ -1,3 +1,13 @@
+'''
+Improvements list:
+ - applying Dominance relation
+ - using common denominators
+ - returning the actual cake combos
+
+ - limited number of each cake (Knapsack 0/1 problem)
+
+'''
+
 def getBagValueOptimized(bag, cakeTupleList):
     '''
     Best case: fill the entire bag with the highest value density cake
