@@ -1,5 +1,6 @@
 from include import Stack
 
+# O(n) time, O(k) space - depends on the number of parentheses
 class ParenthesisMatcher:
     def __init__(self):
         self.parenStack = Stack.Stack()
@@ -19,6 +20,28 @@ class ParenthesisMatcher:
                 elif matchIndex == index:
                     return idx
         return None
+
+def getMatchingParenthesisIndex(sentence, index):
+    # deal with empty sentence case
+    if sentence == "":
+        return None
+
+    # check to make sure the index is valid (assume it is for now)
+    parenCount = 1
+    matchIndex = index + 1
+
+    for character in sentence[index+1:]:
+        if character == "(":
+            parenCount += 1
+        elif character == ")":
+            parenCount -= 1
+
+        if parenCount == 0:
+            return matchIndex
+        else:
+            matchIndex += 1
+
+    return None
 
 def main():
     '''
@@ -40,9 +63,15 @@ def main():
 
 
     p = ParenthesisMatcher()
+    print("Using ParenthesisMatcher Class:")
     for caseNumber, testCase in enumerate(testCaseList):
         # print testCase
         print("Test Case %s passed: %s"%(caseNumber+1, p.getMatchingParenthesisIndex(testCase[0], testCase[1])==testCase[2]))
+
+    print("\nUsing constant space getMatchingParenthesisIndex Function:")
+    for caseNumber, testCase in enumerate(testCaseList):
+        # print testCase
+        print("Test Case %s passed: %s"%(caseNumber+1, getMatchingParenthesisIndex(testCase[0], testCase[1])==testCase[2]))    
 
 if __name__ == "__main__":
     main()
